@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReelsMaster - Крутые видео для Instagram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Общие стили для всех страниц */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Навигация */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ff4d94;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Страницы */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .main-content {
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            border-radius: 2px;
+        }
+        
+        /* Стили для главной страницы */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        
+        .highlight {
+            color: #ff4d94;
+            background: linear-gradient(45deg, #ff4d94, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Секции */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-light {
+            background-color: white;
+        }
+        
+        .section-dark {
+            background-color: #f1f5f9;
+        }
+        
+        /* Карточки услуг */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Портфолио */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .portfolio-item {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .portfolio-item:nth-child(2) {
+            background: linear-gradient(45deg, #ff4d94, #ff8a00);
+        }
+        
+        .portfolio-item:nth-child(3) {
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+        }
+        
+        .portfolio-item:nth-child(4) {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        }
+        
+        .portfolio-item:nth-child(5) {
+            background: linear-gradient(45deg, #ffd26f, #9d50bb);
+        }
+        
+        .portfolio-item:nth-child(6) {
+            background: linear-gradient(45deg, #4776E6, #8E54E9);
+        }
+        
+        /* Обо мне */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Контакты */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 15px;
+            color: #6a11cb;
+            font-size: 20px;
+            width: 30px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-content, .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+        }
+        
+        /* Хлебные крошки */
+        .breadcrumbs {
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .breadcrumbs a {
+            color: #6a11cb;
+            text-decoration: none;
+        }
+        
+        .breadcrumbs span {
+            color: #999;
+        }
+        
+        /* Цены */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border: 2px solid #6a11cb;
+            z-index: 1;
+        }
+        
+        .pricing-card.popular:before {
+            content: 'ПОПУЛЯРНЫЙ';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #6a11cb;
+            color: white;
+            padding: 5px 30px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+        
+        .pricing-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 42px;
+            font-weight: 700;
+            color: #6a11cb;
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #777;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .pricing-features li:before {
+            content: '✓';
+            color: #6a11cb;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-film"></i>
+                    ReelsMaster
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
+                    <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
+                    <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">Обо мне</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная страница -->
+    <div id="home" class="page active">
+        <div class="container main-content">
+            <h1 class="page-title">Создание продающих видео для Instagram Reels</h1>
+            
+            <!-- Герой секция -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Твои Reels будут <span class="highlight">запостили</span></h1>
+                    <p>Профессиональное создание цепляющих и продающих видео для Instagram под ключ. От идеи до реализации - все в одном месте!</p>
+                    <a href="#" class="btn nav-link" data-page="contact">Заказать консультацию</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Instagram Reels">
+                </div>
+            </section>
+            
+            <!-- Секция услуг -->
+            <section class="section section-light">
+                <h2 class="page-title">Мои услуги</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3>Сценарий и идея</h3>
+                        <p>Придумаю крутую идею для вашего Reels, которая понравится вашей аудитории и алгоритму.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Съемка и монтаж</h3>
+                        <p>Сниму профессиональное видео и смонтирую его с эффектными переходами и спецэффектами.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>Саунд-дизайн</h3>
+                        <p>Подберу идеальный саундтрек и настрою звук так, чтобы от видео мурашки бежали по коже.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn nav-link" data-page="services">Все услуги</a>
+                </div>
+            </section>
+            
+            <!-- Секция портфолио -->
+            <section class="section section-dark">
+                <h2 class="page-title">Последние работы</h2>
+                
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">Видео для кофейни</div>
+                    <div class="portfolio-item">Reels для бренда одежды</div>
+                    <div class="portfolio-item">Видео для фитнес-тренера</div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn nav-link" data-page="portfolio">Всё портфолио</a>
+                </div>
+            </section>
+            
+            <!-- Секция о себе -->
+            <section class="section section-light">
+                <h2 class="page-title">Почему именно я?</h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Привет! Меня зовут Макс, и я уже более 3 лет создаю вирусный контент для Instagram. Я знаю все секреты алгоритма и понимаю, как сделать так, чтобы ваше видео увидели тысячи людей.</p>
+                        <p>Я использую профессиональную технику и программы для монтажа, чтобы ваши Reels выглядели на уровне голливудских блокбастеров!</p>
+                        <p>Работаю как с крупными брендами, так и с небольшими локальными бизнесами. У меня индивидуальный подход к каждому клиенту.</p>
+                        <a href="#" class="btn nav-link" data-page="about">Узнать больше</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Видеомейкер">
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Секция призыва к действию -->
+            <section class="section section-dark" style="text-align: center;">
+                <h2 class="page-title">Готовы выйти на новый уровень?</h2>
+                <p style="font-size: 20px; margin-bottom: 30px;">Напишите мне, и мы обсудим ваш проект</p>
+                <a href="#" class="btn nav-link" data-page="contact">Связаться со мной</a>
+            </section>
+        </div>
+    </div>
+
+    <!-- Страница услуг -->
+    <div id="services" class="page">
+        <div class="container main-content">
+            <div class="breadcrumbs">
+                <a href="#" class="nav-link" data-page="home">Главная</a> / <span>Услуги</span>
+            </div>
+            
+            <h1 class="page-title">Мои услуги</h1>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3>Разработка концепции</h3>
+                    <p>Разработаю уникальную концепцию для вашего Reels, которая подчеркнет преимущества вашего продукта или услуги.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Профессиональная съемка</h3>
+                    <p>Осуществлю профессиональную съемку на качественное оборудование с правильным освещением и композицией.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Монтаж видео</h3>
+                    <p>Смонтажирую видео с динамичными переходами, эффектами и цветокоррекцией для максимальной вовлеченности.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Саунд-дизайн</h3>
+                    <p>Подберу идеальную музыку и настрою звук так, чтобы видео смотрелось на высшем уровне.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Визуальные эффекты</h3>
+                    <p>Добавлю современные визуальные эффекты, анимацию текста и графику для усиления воздействия.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Продвижение</h3>
+                    <p>Помогу с продвижением готового Reels через таргетированную рекламу и правильные хештеги.</p>
+                </div>
+            </div>
+            
+            <section class="section section-light">
+                <h2 class="page-title">Пакеты услуг</h2>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Базовый</h3>
+                        <div class="price">5 000 ₽ <span>/ проект</span></div>
+                        <ul class="pricing-features">
+                            <li>Разработка концепции</li>
+                            <li>Монтаж вашего материала</li>
+                            <li>Цветокоррекция</li>
+                            <li>Простой саунд-дизайн</li>
+                            <li>1 вариант видео</li>
+                        </ul>
+                        <a href="#" class="btn nav-link" data-page="contact">Заказать</a>
+                    </div>
+                    
+                    <div class="pricing-card popular">
+                        <h3>Стандарт</h3>
+                        <div class="price">10 000 ₽ <span>/ проект</span></div>
+                        <ul class="pricing-features">
+                            <li>Разработка концепции</li>
+                            <li>Профессиональная съемка</li>
+                            <li>Динамичный монтаж</li>
+                            <li>Качественный саунд-дизайн</li>
+                            <li>3 варианта видео</li>
+                            <li>Базовые визуальные эффекты</li>
+                        </ul>
+                        <a href="#" class="btn nav-link" data-page="contact">Заказать</a>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>Премиум</h3>
+                        <div class="price">20 000 ₽ <span>/ проект</span></div>
+                        <ul class="pricing-features">
+                            <li>Эксклюзивная концепция</li>
+                            <li>Профессиональная съемка 4K</li>
+                            <li>Сложный монтаж с эффектами</li>
+                            <li>Профессиональный саунд-дизайн</li>
+                            <li>5 вариантов видео</li>
+                            <li>Сложные визуальные эффекты</li>
+                            <li>Сопровождение продвижения</li>
+                        </ul>
+                        <a href="#" class="btn nav-link" data-page="contact">Заказать</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Страница портфолио -->
+    <div id="portfolio" class="page">
+        <div class="container main-content">
+            <div class="breadcrumbs">
+                <a href="#" class="nav-link" data-page="home">Главная</a> / <span>Портфолио</span>
+            </div>
+            
+            <h1 class="page-title">Мое портфолио</h1>
+            <p style="text-align: center; margin-bottom: 40px;">Вот некоторые из моих последних работ. Каждое видео было создано с любовью и вниманием к деталям.</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">Видео для кофейни</div>
+                <div class="portfolio-item">Reels для бренда одежды</div>
+                <div class="portfolio-item">Видео для фитнес-тренера</div>
+                <div class="portfolio-item">Реклама для салона красоты</div>
+                <div class="portfolio-item">Промо для ресторана</div>
+                <div class="portfolio-item">Обзор гаджетов</div>
+            </div>
+            
+            <section class="section section-light">
+                <h2 class="page-title">Отзывы клиентов</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"Макс создал для нашего кофе потрясающие Reels. За месяц подписчиков стало на 30% больше, а продажи выросли!"</p>
+                        <h3>Анна, кофейня "CoffeeTime"</h3>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"Работаем с Максом уже полгода. Его видео всегда viral! Клиенты говорят, что узнали о нас именно из Reels."</p>
+                        <h3>Дмитрий, бренд одежды "UrbanStyle"</h3>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"Как фитнес-тренер, я ценю качественный контент. Макс делает видео, которые мотивируют и вдохновляют!"</p>
+                        <h3>Ольга, фитнес-тренер</h3>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Страница "Обо мне" -->
+    <div id="about" class="page">
+        <div class="container main-content">
+            <div class="breadcrumbs">
+                <a href="#" class="nav-link" data-page="home">Главная</a> / <span>Обо мне</span>
+            </div>
+            
+            <h1 class="page-title">Обо мне</h1>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Привет! Меня зовут Макс, и я видеомейкер с более чем 5-летним опытом создания контента для социальных сетей.</p>
+                    <p>Я начал свой путь с простых видео для друзей, а теперь сотрудничаю с известными брендами и создаю контент, который набирает миллионы просмотров.</p>
+                    <p>В 2020 году я сосредоточился на создании контента для Instagram Reels и разработал собственную методику создания viral-видео.</p>
+                    
+                    <h3>Мои навыки:</h3>
+                    <ul class="pricing-features">
+                        <li>Профессиональная съемка на зеркальные и беззеркальные камеры</li>
+                        <li>Монтаж в Adobe Premiere Pro и Final Cut Pro</li>
+                        <li>Работа с цветом в DaVinci Resolve</li>
+                        <li>Создание motion-графики в After Effects</li>
+                        <li>Понимание алгоритмов социальных сетей</li>
+                        <li>Навыки работы со звуком</li>
+                    </ul>
+                    
+                    <a href="#" class="btn nav-link" data-page="contact">Связаться со мной</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Видеомейкер">
+                </div>
+            </div>
+            
+            <section class="section section-light">
+                <h2 class="page-title">Часто задаваемые вопросы</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Сколько времени занимает создание одного Reels? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Время создания зависит от сложности проекта. Обычно это занимает от 1 до 3 дней. Базовый пакет - 1 день, стандартный - 2 дня, премиум - 3 дня.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Нужно ли мне какое-то оборудование? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Для базового пакета вам понадобится только smartphone с хорошей камерой. Для стандартного и премиум пакетов я использую профессиональное оборудование, которое есть у меня.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Можно ли сделать видео в моем стиле? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Конечно! Перед началом работы мы обсуждаем ваши предпочтения, изучаем ваш текущий контент и создаем видео, которое будет соответствовать стилю вашего бренда.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Как происходит процесс работы? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>1. Обсуждение проекта и заключение договора<br>
+                            2. Разработка концепции и сценария<br>
+                            3. Съемка (если входит в пакет)<br>
+                            4. Монтаж и постпродакшн<br>
+                            5. Представление вариантов и правки<br>
+                            6. Финальная версия и передача материалов</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Страница контактов -->
+    <div id="contact" class="page">
+        <div class="container main-content">
+            <div class="breadcrumbs">
+                <a href="#" class="nav-link" data-page="home">Главная</a> / <span>Контакты</span>
+            </div>
+            
+            <h1 class="page-title">Свяжитесь со мной</h1>
+            <p style="text-align: center; margin-bottom: 40px;">Готовы создать viral video для вашего бизнеса? Заполните форму ниже или напишите мне в соцсетях!</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Мои контакты</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (999) 123-45-67</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@reelsmaster.ru</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Москва, ул. Цифровая, 12</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Пн-Пт: 10:00 - 20:00</span>
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 30px;">
+                        <h3>Социальные сети</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-tiktok"></i></a>
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Форма обратной связи</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" placeholder="Как к вам обращаться?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Ваш email для связи" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" placeholder="Ваш телефон (необязательно)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Услуга</label>
+                            <select id="service" required>
+                                <option value="">Выберите услугу</option>
+                                <option value="basic">Базовый пакет</option>
+                                <option value="standard">Стандартный пакет</option>
+                                <option value="premium">Премиум пакет</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" placeholder="Расскажите о вашем проекте..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReelsMaster</h3>
+                    <p>Создание продающих видео для Instagram Reels под ключ. От идеи до реализации.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="nav-link" data-page="home">Главная</a></li>
+                        <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
+                        <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">Обо мне</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@reelsmaster.ru</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Цифровая, 12</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Соцсети</h3>
+                    <p>Подпишитесь на меня в соцсетях</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 ReelsMaster. Все права защищены.</p>
+                <p>Сайт создан учеником "Алгоритмики" с помощью HTML и CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигация между страницами
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка навигации
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Скрыть все страницы
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Показать целевую страницу
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Обновить активную ссылку в навигации
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Прокрутка к верху страницы
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Обработка формы
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Спасибо за ваше сообщение! Я свяжусь с вами в ближайшее время.');
+                    contactForm.reset();
+                });
+            }
+            
+            // FAQ аккордеон
+            const faqItems = document.querySelectorAll('.faq-item');
+            if (faqItems.length > 0) {
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    question.addEventListener('click', () => {
+                        item.classList.toggle('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
